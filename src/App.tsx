@@ -2,6 +2,7 @@ import React, {FC, useEffect, useState} from 'react';
 import './App.css';
 import IUser from "./model/IUser";
 import UserComponent from "./components/user/UserComponent";
+import {getUsers} from "./services/user.api.service";
 
 
 const App: FC = () => {
@@ -9,12 +10,10 @@ const App: FC = () => {
     const [users, setUsers] = useState<IUser[]>([]);
 
     useEffect(() => {
-        fetch('https://jsonplaceholder.typicode.com/users')
-            .then(value => value.json())
+        getUsers()
             .then(value => {
                 setUsers(value);
             });
-
         return () => {
             console.log('end');
         }
