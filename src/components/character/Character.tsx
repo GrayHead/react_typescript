@@ -1,5 +1,5 @@
 import React, {FC, ReactNode} from 'react';
-
+import './Character.css'
 
 interface IProps {
     name: string;
@@ -9,7 +9,7 @@ interface IProps {
 
 type PropsWithChildren<X> = X & { children?: ReactNode };
 
-const Character: FC<PropsWithChildren<IProps>> = ({name, image,children}) => {
+const Character: FC<PropsWithChildren<IProps>> = ({name, image, children}) => {
 
     return (
         <div>
