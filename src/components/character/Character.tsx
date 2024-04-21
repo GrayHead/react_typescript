@@ -1,10 +1,17 @@
 import React, {FC} from 'react';
 
-const Character: FC = () => {
+
+interface IProps {
+    name: string;
+    image: string;
+}
+
+const Character: FC<IProps> = ({name,image}) => {
+
     return (
         <div>
-            <h2>homer</h2>
-            <img src="https://upload.wikimedia.org/wikipedia/en/a/aa/Bart_Simpson_200px.png" alt=""/>
+            <h2>{name}</h2>
+            <img src={image} alt={name}/>
         </div>
     );
 };
