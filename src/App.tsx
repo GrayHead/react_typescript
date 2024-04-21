@@ -1,4 +1,4 @@
-import React, {FC, useState} from 'react';
+import React, {FC, useCallback, useState} from 'react';
 import './App.css';
 import Menu from "./components/menu/Menu";
 import User from "./components/user/User";
@@ -8,9 +8,14 @@ const App: FC = () => {
     const incrmentId = () => {
         setId(prevState => ++prevState);
     }
+
+    const someFunction = useCallback(() => {
+        console.log('asd');
+    }, [id]);
+
     return (
         <>
-            <Menu/>
+            <Menu someFunction={someFunction}/>
             <User id={id}/>
             <button onClick={incrmentId}>increment id</button>
         </>
