@@ -12,7 +12,7 @@ const App: FC = () => {
     useEffect(() => {
         getUsers()
             .then(value => {
-                setUsers(value);
+                setUsers(value.data);
             });
         return () => {
             console.log('end');
