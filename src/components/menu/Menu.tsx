@@ -1,16 +1,16 @@
 import React, {FC, memo} from 'react';
 
 type IProps = {
-    someFunction: () => void
+    links: string[];
 }
-const Menu: FC<IProps> = memo(() => {
+const Menu: FC<IProps> = memo(({links}) => {
     console.log('menu');
     return (
         <div>
-            <ul>
-                <li>users</li>
-                <li>posts</li>
-                <li>comments</li>
+            <ul>{
+                links.map((item, i) => <li key={i}>{item}</li>)
+
+            }
             </ul>
         </div>
     );
