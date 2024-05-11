@@ -8,7 +8,7 @@ const HeaderComponent = () => {
 
             <span><NavLink to={'contacts'}>contacts</NavLink></span>
 
-            <span><NavLink to={'asdsad'}>adssadas</NavLink></span>
+            <span><NavLink to={'asdsad'}> adssadas</NavLink></span>
 
             <hr/>
         </div>
