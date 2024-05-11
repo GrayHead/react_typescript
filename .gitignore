@@ -21,9 +21,13 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-.idea/inspectionProfiles/Project_Default.xml
-.idea/vcs.xml
 
 
 
 
+
+/.idea/.gitignore
+/.idea/misc.xml
+/.idea/modules.xml
+/.idea/inspectionProfiles/Project_Default.xml
+/.idea/vcs.xml
