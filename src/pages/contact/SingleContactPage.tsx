@@ -1,29 +1,32 @@
 import React, {useEffect, useState} from 'react';
-import {useLocation, useParams} from "react-router-dom";
+import {useParams} from "react-router-dom";
+import {IUserContactModel} from "../../models/IUserContactModel";
+import {userApiService} from "../../services/api.service";
+import {useAppLocation} from "../../components/hooks/useAppLocation";
 
 const SingleContactPage = () => {
 
     const {id} = useParams();
-    const {state: {contact: item}} = useLocation();
-    console.log(item);
-    const [contact, setContact] = useState<any>({});
+    const {state: {contact: item}} = useAppLocation<{ contact: IUserContactModel }>();
+
+    const [contact, setContact] = useState<IUserContactModel | null>(null);
 
 
     useEffect(() => {
         if (item) {
             setContact(item);
+        } else if (id) {
+            userApiService
+                .getUserById(id)
+                .then(value => setContact(value.data));
         } else {
-            fetch('https://jsonplaceholder.typicode.com/users/' + id)
-                .then(value => value.json())
-                .then(value => {
-                    setContact(value);
-                });
+            throw new Error('i fucker up');
         }
     }, [id, item]);
 
     return (
         <div>
-            {contact.name} - {contact.username}
+            {contact && <>{contact.name} - {contact.username}</>}
         </div>
     );
 };
