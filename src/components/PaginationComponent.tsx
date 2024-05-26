@@ -7,6 +7,8 @@ interface IProps {
     prev: null | IPaginationPageModel;
 }
 
+
+
 const PaginationComponent: FC<IProps> = ({next, prev, changePage}) => {
     return (
         <div>
