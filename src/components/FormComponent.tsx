@@ -8,7 +8,9 @@ const FormComponent = () => {
     const {
         handleSubmit,
         register
-    } = useForm<AuthDataModel>();
+    } = useForm<AuthDataModel>({
+        defaultValues:{username:'userSZ1',password:'P@$$word1'}
+    });
 
     const [isAuthState, setIsAuthState] = useState<boolean>(false);
 
