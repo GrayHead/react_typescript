@@ -5,11 +5,11 @@ import styles from './HeaderComponent.module.css'
 const HeaderComponent = () => {
     return (
         <div className={styles.xxx}>
-            <span><NavLink to={'about'}>about</NavLink> </span>
+            <ul>
+                <li><NavLink to={'/'}>auth page</NavLink></li>
+                <li><NavLink to={'cars'}>cars page</NavLink></li>
+            </ul>
 
-            <span><NavLink to={'contacts'}>contacts</NavLink></span>
-
-            <span><NavLink to={'asdsad'}>adssadas</NavLink></span>
 
             <hr/>
         </div>
