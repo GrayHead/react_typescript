@@ -30,8 +30,7 @@ const CarsPage = () => {
     return (
         <div>
             <CarsComponent cars={carPaginatedObject.items}/>
-            <PaginationComponent next={carPaginatedObject.next} prev={carPaginatedObject.prev}
-            />
+            <PaginationComponent next={carPaginatedObject.next} prev={carPaginatedObject.prev}/>
         </div>
     );
 };
