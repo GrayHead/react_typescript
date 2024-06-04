@@ -4,21 +4,32 @@ import {createContext, useContext} from "react";
 
 type StoreType = {
     userStore: {
-        allUsers: IUserModel[]
+        allUsers: IUserModel[],
+        set: (obj: IUserModel) => void,
+        favoriteUser: IUserModel | null;
     },
     postStore: {
-        allPosts: IPostModel[]
-    }
+        allPosts: IPostModel[],
+
+    },
+
+
 }
 
-const defaultValue: StoreType = {
+
+export let defaultValue = {
     userStore: {
-        allUsers: []
+        allUsers: [],
+        set: (obj: IUserModel) => {
+        },
+        favoriteUser: null
+
     },
     postStore: {
-        allPosts: []
+        allPosts: [],
+
     }
 };
-export const MyContext = createContext<StoreType>(defaultValue);
+export let Context = createContext<StoreType>(defaultValue);
 
-export const useContextProvider = (): StoreType => useContext(MyContext);
+export const useContextProvider = (): StoreType => useContext(Context);

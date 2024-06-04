@@ -1,6 +1,4 @@
-import axios, {AxiosResponse} from "axios";
-import {IUserModel} from "../models/IUserModel";
-import {IPostModel} from "../models/IPostModel";
+import axios from 'axios';
 
 const axiosInstance = axios.create({
     baseURL: 'https://jsonplaceholder.typicode.com',
@@ -8,17 +6,22 @@ const axiosInstance = axios.create({
 });
 
 const userService = {
-    getUsers: async (): Promise<AxiosResponse<IUserModel[]>> => {
-        return await axiosInstance.get<IUserModel[]>('/users');
-    }
+    getUsers: async () => {
+        return await axiosInstance.get('/users')
+    },
+    getSingleUser: async (id: number) => await axiosInstance.get('/users/' + id)
 }
+
 const postService = {
-    getPosts: async (): Promise<AxiosResponse<IPostModel[]>> => {
-        return await axiosInstance.get<IPostModel[]>('/posts');
-    }
+    getPosts: async () => {
+        return await axiosInstance.get('/posts')
+    },
+    getSinglePOst: async (id: number) => await axiosInstance.get('/posts/' + id)
 }
 
 export {
     userService,
     postService
 }
+
+

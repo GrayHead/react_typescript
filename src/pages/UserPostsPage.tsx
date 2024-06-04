@@ -1,27 +1,29 @@
 import React, {useEffect, useMemo, useState} from 'react';
-import UserPostsComponent from "../components/UserPostsComponent";
 import {useContextProvider} from "../context/ContextProvider";
+import UserPostsComponent from "../component/UserPostsComponent";
 import {UserWithPostsType} from "../models/UserWithPostsType";
 
 const UserPostsPage = () => {
 
-    const {userStore: {allUsers}, postStore: {allPosts}} = useContextProvider();
-    const [userWithPostsState, setUserWithPostsState] = useState<UserWithPostsType[]>([]);
+    let {userStore: {allUsers}, postStore: {allPosts}} = useContextProvider();
 
+    const [usersWithPostsState, setUsersWithPostsState] = useState<UserWithPostsType[]>([]);
 
-    const usersWithPostsArray = useMemo(() => {
-        return allUsers.map(user => {
-            return {...user, posts: allPosts.filter(post => post.userId === user.id)}
+    const userWithPostsArrayResultMemo = useMemo(() => {
+
+        return allUsers.map((user: any) => {
+            return {...user, posts: allPosts.filter((post: any) => post.userId === user.id)};
         })
     }, [allUsers, allPosts]);
-    useEffect(() => {
-        setUserWithPostsState(usersWithPostsArray);
-    }, [usersWithPostsArray]);
 
+    useEffect(() => {
+
+        setUsersWithPostsState(userWithPostsArrayResultMemo);
+    }, [userWithPostsArrayResultMemo, usersWithPostsState]);
 
     return (
         <div>
-            <UserPostsComponent items={userWithPostsState}/>
+            <UserPostsComponent items={usersWithPostsState}/>
         </div>
     );
 };

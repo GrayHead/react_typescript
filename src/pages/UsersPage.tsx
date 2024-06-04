@@ -1,7 +1,8 @@
 import React from 'react';
-import UsersComponent from "../components/UsersComponent";
+import UsersComponent from "../component/UsersComponent";
 
 const UsersPage = () => {
+
 
     return (
         <div>
