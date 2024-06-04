@@ -1,20 +1,35 @@
-import React, {FC} from 'react';
+import React, {useEffect, useMemo, useState} from 'react';
+import {useContextProvider} from "../context/ContextProvider";
 import {UserWithPostsType} from "../models/UserWithPostsType";
 
-interface IProps {
-    items: UserWithPostsType[]
-}
 
-const UserPostsComponent: FC<IProps> = ({items}) => {
+const UserPostsComponent = () => {
+    const {postStore: {allPosts}, userStore: {allUsers}} = useContextProvider();
+    const [usersWithPostsState, setUsersWithPostsState] = useState<UserWithPostsType[]>([]);
+
+    const userWithPostsArray = useMemo(() => {
+        return () => {
+            return allUsers.map(user => {
+                return {...user, posts: allPosts.filter(post => post.userId === user.id)};
+            });
+        }
+    }, [allPosts, allUsers]);
+
+    useEffect(() => {
+        setUsersWithPostsState(userWithPostsArray);
+    }, [userWithPostsArray]);
+
+
     return (
         <div>
             {
-                items.map((item) => <div key={item.id}>
-                    {item.name}
+                usersWithPostsState.map(user => <div key={user.id}>
+                    <div>{user.username}</div>
                     <ul>
                         {
-                            item.posts.map((post) => (<li key={post.id}>{post.title}</li>))
+                            user.posts.map(post => <li key={post.id}>{post.title}</li>)
                         }
+
                     </ul>
                 </div>)
             }

@@ -5,7 +5,6 @@ import UserComponent from "./UserComponent";
 const UsersComponent = () => {
 
     const {userStore: {allUsers}} = useContextProvider();
-
     return (
         <div>
             {
