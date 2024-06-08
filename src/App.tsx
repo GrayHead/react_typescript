@@ -1,24 +1,35 @@
-import React, {FC} from 'react';
+import React, {FC, useEffect} from 'react';
 import './App.css';
-import {decrement, increment, incrementByAmount, useAppDispatch, useAppSelector} from "./redux/store";
+import {useDispatch} from "react-redux";
+import {postActions, useAppDispatch, useAppSelector, userActions} from "./redux/store";
+import {postService} from "./services/api.service";
 
 
 const App: FC = () => {
 
-    const counter1ValueState
-        = useAppSelector(state => state.counter1SliceState.value)
     const dispatch = useAppDispatch();
 
+    const {userSlice: {users}, postSlice: {posts}} = useAppSelector(state => state);
+    useEffect(() => {
+        dispatch(userActions.loadUsers());
+        dispatch(postActions.loadPosts())
+    }, []);
 
     return (
         <div>
-            <h2>{counter1ValueState}</h2>
+            {
+                users.map(user => <div>{user.name} : {
+                    user.email
+                }</div>)
 
-            <button onClick={() => dispatch(increment())}>do increment</button>
 
-            <button onClick={() => dispatch(decrement())}>do decrement</button>
+            }
 
-            <button onClick={() => dispatch(incrementByAmount(10))}>do inc by ammount of 10</button>
+            <hr/>
+            {
+                posts.map(post => <div> {post.title}</div>)
+            }
+
         </div>
 
     );
