@@ -1,25 +1,17 @@
-import React, {useEffect, useState} from 'react';
-import {characterService} from "../services/api.service";
+import React, {FC} from 'react';
 import {ICharacter} from "../models/ICharacter";
-import {useSearchParams} from "react-router-dom";
 
-const CharactersComponent = () => {
+interface IProps {
+    characters: ICharacter[];
+}
 
-    const [query, setQuery] = useSearchParams({page: '1'});
+const CharactersComponent: FC<IProps> = ({characters}) => {
 
-    const [charactersState, setCharactersState] = useState<ICharacter[]>([])
-    useEffect(() => {
-        const currentPage = query.get('page') || '1';
-
-        characterService.getAll(currentPage).then(value => {
-            setCharactersState(value.data.results);
-        });
-    }, [query]);
 
     return (
         <div>
             {
-                charactersState.map(character => (<div key={character.id}>{character.name}</div>))
+                characters.map(character => (<div key={character.id}>{character.name}</div>))
             }
         </div>
     );
