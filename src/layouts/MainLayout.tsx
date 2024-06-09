@@ -1,14 +1,20 @@
-import React from 'react';
-import HeaderComponent from "../components/header/HeaderComponent";
-import FooterComponent from "../components/footer/FooterComponent";
-import {Outlet} from "react-router-dom";
+import React, {useEffect} from 'react';
+import PaginationComponent from "../components/PaginationComponent";
+import {useSearchParams} from "react-router-dom";
 
 const MainLayout = () => {
+
+    const [query] = useSearchParams();
+
+
+    useEffect(() => {
+        console.log(query.get('page'));
+
+    }, [query]);
     return (
         <div>
-            <HeaderComponent/>
-            <Outlet/>
-            <FooterComponent/>
+
+            <PaginationComponent/>
 
         </div>
     );
