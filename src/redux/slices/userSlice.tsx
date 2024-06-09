@@ -6,12 +6,14 @@ import {AxiosError} from "axios";
 type UserSliceType = {
     users: IUser[];
     isLoaded: boolean;
+    user: IUser | null
 }
 
 
 const userInitState: UserSliceType = {
     users: [],
     isLoaded: false,
+    user: null
 }
 
 const loadUsers = createAsyncThunk(
@@ -27,6 +29,20 @@ const loadUsers = createAsyncThunk(
         }
     }
 );
+const loadUserById = createAsyncThunk(
+    'userSlice/loadUserById',
+    async (_: string | undefined, thunkAPI) => {
+
+        try {
+            const user = await userService.getById(_);
+            return thunkAPI.fulfillWithValue(user);
+        } catch (e) {
+            const error = e as AxiosError;
+            return thunkAPI.rejectWithValue(error.response?.data);
+        }
+
+    }
+)
 
 
 export const userSlice = createSlice({
@@ -39,6 +55,9 @@ export const userSlice = createSlice({
     },
     extraReducers: builder =>
         builder
+            .addCase(loadUserById.fulfilled,(state, action) => {
+                state.user = action.payload;
+            })
             .addCase(loadUsers.fulfilled, (state, action) => {
                 state.users = action.payload;
             })
@@ -52,5 +71,6 @@ export const userSlice = createSlice({
 
 export const userActions = {
     ...userSlice.actions,
-    loadUsers
+    loadUsers,
+    loadUserById
 }
