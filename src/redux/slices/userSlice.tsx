@@ -1,5 +1,5 @@
 import {IUser} from "../../models/IUser";
-import {createAsyncThunk, createSlice, isFulfilled, isPending, isRejected, PayloadAction} from "@reduxjs/toolkit";
+import {createAsyncThunk, createSlice, isFulfilled, PayloadAction} from "@reduxjs/toolkit";
 import {userService} from "../../services/api.service";
 import {AxiosError} from "axios";
 
