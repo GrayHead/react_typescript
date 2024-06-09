@@ -1,10 +1,9 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import {useSearchParams} from "react-router-dom";
 
 const PaginationComponent = () => {
 
-    const [query, setQuery] = useSearchParams({page: '0'});
-
+    const [query, setQuery] = useSearchParams({page: '1'});
 
 
     return (
@@ -19,6 +18,7 @@ const PaginationComponent = () => {
 
             }}>prev
             </button>
+
             <button onClick={() => {
 
                 const page = query.get('page');
